@@ -117,18 +117,18 @@ bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
 
 # volume control
 bindsym $mod+Ctrl+space exec "amixer sset Master toggle"
-bindsym $mod+Ctrl+Left exec "amixer sset Master 5%-"
-bindsym $mod+Ctrl+Right exec "amixer sset Master 5%+"
-bindsym $mod+Ctrl+1 exec "amixer sset Master 10%"
-bindsym $mod+Ctrl+2 exec "amixer sset Master 20%"
-bindsym $mod+Ctrl+3 exec "amixer sset Master 30%"
-bindsym $mod+Ctrl+4 exec "amixer sset Master 40%"
-bindsym $mod+Ctrl+5 exec "amixer sset Master 50%"
-bindsym $mod+Ctrl+6 exec "amixer sset Master 60%"
-bindsym $mod+Ctrl+7 exec "amixer sset Master 70%"
-bindsym $mod+Ctrl+8 exec "amixer sset Master 80%"
-bindsym $mod+Ctrl+9 exec "amixer sset Master 90%"
-bindsym $mod+Ctrl+0 exec "amixer sset Master 100%"
+bindsym $mod+Ctrl+Left exec "amixer sset Master 5%- unmute"
+bindsym $mod+Ctrl+Right exec "amixer sset Master 5%+ unmute"
+bindsym $mod+Ctrl+1 exec "amixer sset Master 10% unmute"
+bindsym $mod+Ctrl+2 exec "amixer sset Master 20% unmute"
+bindsym $mod+Ctrl+3 exec "amixer sset Master 30% unmute"
+bindsym $mod+Ctrl+4 exec "amixer sset Master 40% unmute"
+bindsym $mod+Ctrl+5 exec "amixer sset Master 50% unmute"
+bindsym $mod+Ctrl+6 exec "amixer sset Master 60% unmute"
+bindsym $mod+Ctrl+7 exec "amixer sset Master 70% unmute"
+bindsym $mod+Ctrl+8 exec "amixer sset Master 80% unmute"
+bindsym $mod+Ctrl+9 exec "amixer sset Master 90% unmute"
+bindsym $mod+Ctrl+0 exec "amixer sset Master 100% unmute"
 
 # Start i3bar to display a workspace bar 
 bar {
