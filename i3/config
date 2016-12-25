@@ -10,10 +10,23 @@ exec_always "compton -CGb"
 exec "dropbox start"
 exec "wicd-client --tray"
 
-# common application shortcuts
+# application launchers
 bindsym $mod+Return exec "i3-sensible-terminal"
-bindsym $mod+b exec "chromium"
-bindsym $mod+m exec "spotify"
+bindsym $mod+o mode "Launch"
+mode "Launch" {
+  bindsym a exec atom
+  bindsym t exec thunar
+  bindsym c exec chromium
+  bindsym s exec spotify
+  bindsym v exec pavucontrol
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+
+# system power commands
+bindsym $mod+Ctrl+s exec "systemctl suspend"
+bindsym $mod+Ctrl+p exec "sudo shutdown -h now"
+bindsym $mod+Ctrl+r ecec "sudo reboot"
 
 # hide window borders by default
 new_window pixel
@@ -119,9 +132,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Ctrl+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # resize focused container
 bindsym $mod+Ctrl+h resize grow width 10 px or 5 ppt
 bindsym $mod+Ctrl+j resize grow height 10 px or 5 ppt
@@ -145,6 +155,22 @@ bindsym $mod+Ctrl+7 exec "amixer sset Master 70% unmute"
 bindsym $mod+Ctrl+8 exec "amixer sset Master 80% unmute"
 bindsym $mod+Ctrl+9 exec "amixer sset Master 90% unmute"
 bindsym $mod+Ctrl+0 exec "amixer sset Master 100% unmute"
+
+# power control mode
+bindsym $mod+Shift+q mode "Power"
+mode "Power" {
+  set $i3lock i3lock -i /home/donald/Dropbox/Photos/Wallpapers/planet-hud.jpg
+  bindsym p exec systemctl poweroff
+  bindsym r exec systemctl reboot
+  bindsym l mode "default", exec $i3lock
+  bindsym q exec --no-startup-id i3-msg exit, mode "default"
+  bindsym h exec systemctl hibernate
+  bindsym s exec "$i3lock && systemctl suspend", mode "default"
+  #bindsym s exec systemctl hybrid-sleep
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
 # Start i3bar to display a workspace bar 
 bar {
