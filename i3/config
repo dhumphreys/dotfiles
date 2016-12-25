@@ -2,12 +2,11 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# use windows key as mod key
 set $mod Mod4
 
-# start composite manager
-exec "compton -CGb"
-
 # start-up applications
+exec_always "compton -CGb"
 exec "dropbox start"
 exec "wicd-client --tray"
 
@@ -130,6 +129,9 @@ bindsym $mod+Ctrl+k resize shrink height 10 px or 5 ppt
 bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
 
 # volume control
+bindsym XF86AudioMute exec "amixer sset Master toggle"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 5%- unmute"
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+ unmute"
 bindsym $mod+Ctrl+space exec "amixer sset Master toggle"
 bindsym $mod+Ctrl+Left exec "amixer sset Master 5%- unmute"
 bindsym $mod+Ctrl+Right exec "amixer sset Master 5%+ unmute"
