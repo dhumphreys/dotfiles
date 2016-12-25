@@ -16,13 +16,6 @@ separator_block_width= 10
 #
 # Each block displays in order in the i3status bar
 
-[mediaplayer]
-label=♪
-interval=1
-signal=10
-color=#50C878
-# url https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/mediaplayer/mediaplayer
-
 [memory]
 label=
 separator=false
@@ -44,12 +37,12 @@ separator=false
 label= 
 
 [wireless]
-label=
-#label=  
+#label=
+label=  
 command=echo "$(/sbin/iw dev wlp8s0 link | grep SSID | cut -d " " -f 2-)"
 #command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
-#color=#d33682
-color=#98971a
+color=#d33682
+#color=#98971a
 interval=2
 
 [cpu_usage]
@@ -66,8 +59,7 @@ signal=2
 color=#d79921
 
 [battery]
-#label=⚡
-command=~/.config/i3/battery.py
+label=🔋
 markup=pango
 interval=30
 color=#458588
@@ -84,7 +76,8 @@ color=#cc241d
 
 
 [time]
-label=
+#label=
+label=🕑
 command=date '+%a %Y-%m-%d %l:%M:%S %p'
 #command=date '+%a %Y-%m-%d %R:%S'
 interval=1
