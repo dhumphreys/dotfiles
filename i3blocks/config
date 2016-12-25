@@ -1,0 +1,93 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator=false
+separator_block_width= 10
+#markup=none
+
+# Blocks
+#
+# Each block displays in order in the i3status bar
+
+[mediaplayer]
+label=♪
+interval=1
+signal=10
+color=#50C878
+# url https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/mediaplayer/mediaplayer
+
+[memory]
+label=
+separator=false
+interval=1
+color=#1793D1
+
+[disk]
+#label=:
+label=:
+interval=30
+#color=#1793D1
+color=#cc241d
+#color=#859900
+
+[iface]
+color=#00FF00
+interval=1
+separator=false
+label= 
+
+[wireless]
+label=
+#label=  
+command=echo "$(/sbin/iw dev wlp8s0 link | grep SSID | cut -d " " -f 2-)"
+#command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
+#color=#d33682
+color=#98971a
+interval=2
+
+[cpu_usage]
+label= 
+interval=10
+color=#00FF00
+
+[brightness]
+label= 
+#label= 
+command= printf "%.0f " $(xbacklight -get)
+interval=1
+signal=2
+color=#d79921
+
+[battery]
+#label=⚡
+command=~/.config/i3/battery.py
+markup=pango
+interval=30
+color=#458588
+
+[volume]
+label=
+command=/usr/share/i3blocks/volume
+instance=Master
+interval=1
+instance=Master
+signal=10
+#color=#d70a53
+color=#cc241d
+
+
+[time]
+label=
+command=date '+%a %Y-%m-%d %l:%M:%S %p'
+#command=date '+%a %Y-%m-%d %R:%S'
+interval=1
+#color=#50C878
+color=#928374
+separator_block_width=0
