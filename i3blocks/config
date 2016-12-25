@@ -8,13 +8,19 @@
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 command=/usr/share/i3blocks/$BLOCK_NAME
-separator=false
+separator=true
 separator_block_width= 10
 #markup=none
 
 # Blocks
 #
 # Each block displays in order in the i3status bar
+
+[load_average]
+label=
+interval=10
+separator=false
+color=#00FF00
 
 [memory]
 label=
@@ -24,7 +30,7 @@ color=#1793D1
 
 [disk]
 #label=:
-label=:
+label=
 interval=30
 #color=#1793D1
 color=#cc241d
@@ -33,7 +39,6 @@ color=#cc241d
 [iface]
 color=#00FF00
 interval=1
-separator=false
 label= 
 
 [wireless]
@@ -44,11 +49,6 @@ command=echo "$(/sbin/iw dev wlp8s0 link | grep SSID | cut -d " " -f 2-)"
 color=#d33682
 #color=#98971a
 interval=2
-
-[cpu_usage]
-label= 
-interval=10
-color=#00FF00
 
 [brightness]
 label= 
@@ -62,18 +62,15 @@ color=#d79921
 label=🔋
 markup=pango
 interval=30
-color=#458588
+#color=#458588
 
 [volume]
 label=
-command=/usr/share/i3blocks/volume
 instance=Master
 interval=1
-instance=Master
 signal=10
 #color=#d70a53
 color=#cc241d
-
 
 [time]
 #label=
