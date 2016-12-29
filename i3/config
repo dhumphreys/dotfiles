@@ -2,48 +2,12 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# use windows key as mod key
+#####################
+# Window Management #
+#####################
+
+# set preferred mod key
 set $mod Mod4
-
-# start-up applications
-exec_always "compton -CGb"
-exec "dropbox start"
-exec "wicd-client --tray"
-
-# application launchers
-bindsym $mod+Return exec "i3-sensible-terminal"
-bindsym $mod+o mode "Launch"
-mode "Launch" {
-  bindsym a exec atom
-  bindsym t exec thunar
-  bindsym c exec chromium
-  bindsym s exec spotify
-  bindsym v exec pavucontrol
-  bindsym Escape mode "default"
-  bindsym Return mode "default"
-}
-
-# system power commands
-bindsym $mod+Ctrl+s exec "systemctl suspend"
-bindsym $mod+Ctrl+p exec "sudo shutdown -h now"
-bindsym $mod+Ctrl+r ecec "sudo reboot"
-
-# hide window borders by default
-new_window pixel
-
-# Font for window titles (and bar)
-#font pango:monospace 8
-font pango:DejaVu Sans Mono 8
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
-# set some nice colors      border         background      text
-client.focused              #2aa198        #2aa198         #eee895
-client.unfocused            #021215        #021215         #586e75
-client.focused_inactive     #073642        #073642         #839496
-client.urgent               #cb4b16        #dc322f         #fdf6e3
-
-# set desktop wallpaper
-exec --no-startup-id "feh --bg-fill /home/donald/Dropbox/Photos/Wallpapers/green-streak.jpg"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -51,20 +15,23 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+r exec dmenu_run
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# move focused window
+# move focused container
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
+# resize focused container
+bindsym $mod+Ctrl+h resize grow width 10 px or 5 ppt
+bindsym $mod+Ctrl+j resize grow height 10 px or 5 ppt
+bindsym $mod+Ctrl+k resize shrink height 10 px or 5 ppt
+bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
 
 # split in by orientation
 bindsym $mod+g split h
@@ -88,7 +55,17 @@ bindsym $mod+Shift+Ctrl+space focus mode_toggle
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
-# workspace variables
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+##############
+# Workspaces #
+##############
+
+# workspace names
 set $ws1 "1:Web"
 set $ws2 "2:Code"
 set $ws3 "3:Mail"
@@ -126,19 +103,29 @@ assign [class="Atom"] $ws2
 assign [class="Spotify"] $ws4
 assign [class="Thunar"] $ws5
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
+####################
+# Power Management #
+####################
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+q mode "Power"
+mode "Power" {
+  set $i3lock i3lock -i /home/donald/Dropbox/Photos/Wallpapers/planet-hud.jpg
+  bindsym p exec systemctl poweroff
+  bindsym r exec systemctl reboot
+  bindsym l mode "default", exec $i3lock
+  bindsym q exec --no-startup-id i3-msg exit, mode "default"
+  bindsym h exec systemctl hibernate
+  bindsym s exec "$i3lock && systemctl suspend", mode "default"
+  #bindsym s exec systemctl hybrid-sleep
 
-# resize focused container
-bindsym $mod+Ctrl+h resize grow width 10 px or 5 ppt
-bindsym $mod+Ctrl+j resize grow height 10 px or 5 ppt
-bindsym $mod+Ctrl+k resize shrink height 10 px or 5 ppt
-bindsym $mod+Ctrl+l resize shrink width 10 px or 5 ppt
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
-# volume control
+##################
+# Volume Control #
+##################
+
 bindsym XF86AudioMute exec "amixer sset Master toggle"
 bindsym XF86AudioLowerVolume exec "amixer sset Master 5%- unmute"
 bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+ unmute"
@@ -156,23 +143,29 @@ bindsym $mod+Ctrl+8 exec "amixer sset Master 80% unmute"
 bindsym $mod+Ctrl+9 exec "amixer sset Master 90% unmute"
 bindsym $mod+Ctrl+0 exec "amixer sset Master 100% unmute"
 
-# power control mode
-bindsym $mod+Shift+q mode "Power"
-mode "Power" {
-  set $i3lock i3lock -i /home/donald/Dropbox/Photos/Wallpapers/planet-hud.jpg
-  bindsym p exec systemctl poweroff
-  bindsym r exec systemctl reboot
-  bindsym l mode "default", exec $i3lock
-  bindsym q exec --no-startup-id i3-msg exit, mode "default"
-  bindsym h exec systemctl hibernate
-  bindsym s exec "$i3lock && systemctl suspend", mode "default"
-  #bindsym s exec systemctl hybrid-sleep
+##############
+# Appearance #
+##############
 
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
+# hide window borders by default
+new_window pixel
 
-# Start i3bar to display a workspace bar 
+# Font for window titles (and bar)
+font pango:DejaVu Sans Mono 8
+
+# set some nice colors      border         background      text
+client.focused              #2aa198        #2aa198         #eee895
+client.unfocused            #021215        #021215         #586e75
+client.focused_inactive     #073642        #073642         #839496
+client.urgent               #cb4b16        #dc322f         #fdf6e3
+
+# set desktop wallpaper
+exec --no-startup-id "feh --bg-fill /home/donald/Dropbox/Photos/Wallpapers/green-streak.jpg"
+
+###################
+# Information Bar #
+###################
+
 bar {
   status_command i3blocks
   position top
@@ -189,4 +182,29 @@ bar {
     inactive_workspace #002b36 #021215 #586e75
     urgent_workspace   #cb4b16 #dc322f #fdf6e3
   }
+}
+
+################
+# Applications #
+################
+
+# start-up applications
+exec_always "compton -CGb"
+exec "dropbox start"
+exec "wicd-client --tray"
+
+# open program launcher
+bindsym $mod+r exec dmenu_run
+
+# application shortcut mode
+bindsym $mod+Return exec "i3-sensible-terminal"
+bindsym $mod+o mode "Launch"
+mode "Launch" {
+  bindsym a exec atom
+  bindsym t exec thunar
+  bindsym c exec chromium
+  bindsym s exec spotify
+  bindsym v exec pavucontrol
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
 }
