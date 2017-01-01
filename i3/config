@@ -152,6 +152,14 @@ bindsym $mod+Ctrl+8 exec "amixer sset Master 80% unmute"
 bindsym $mod+Ctrl+9 exec "amixer sset Master 90% unmute"
 bindsym $mod+Ctrl+0 exec "amixer sset Master 100% unmute"
 
+#################
+# Media Control #
+#################
+
+bindsym $mod+Ctrl+p exec "playerctl play-pause"
+bindsym $mod+Ctrl+n exec "playerctl next"
+bindsym $mod+Ctrl+m exec "playerctl previous"
+
 ##############
 # Appearance #
 ##############
