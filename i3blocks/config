@@ -42,18 +42,30 @@ interval=1
 label= 
 
 [wireless]
-#label=
-label=  
+label=
 command=echo "$(/sbin/iw dev wlp8s0 link | grep SSID | cut -d " " -f 2-)"
 #command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
 color=#d33682
 #color=#98971a
 interval=2
 
+[media]
+label=
+command=echo "$(playerctl metadata artist) - $(playerctl metadata title)"
+color=#50C878
+interval=1
+
+[volume]
+label=
+instance=Master
+interval=1
+signal=10
+#color=#d70a53
+color=#cc241d
+
 [brightness]
-label= 
-#label= 
-command= printf "%.0f " $(xbacklight -get)
+label=
+command= printf "%.0f" $(xbacklight -get)
 interval=1
 signal=2
 color=#d79921
@@ -64,20 +76,9 @@ markup=pango
 interval=30
 #color=#458588
 
-[volume]
-label=
-instance=Master
-interval=1
-signal=10
-#color=#d70a53
-color=#cc241d
-
 [time]
-#label=
 label=🕑
 command=date '+%a %Y-%m-%d %l:%M:%S %p'
-#command=date '+%a %Y-%m-%d %R:%S'
 interval=1
-#color=#50C878
 color=#928374
 separator_block_width=0
