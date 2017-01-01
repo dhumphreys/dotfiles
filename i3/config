@@ -122,6 +122,15 @@ mode "Power" {
   bindsym Escape mode "default"
 }
 
+######################
+# Brightness Control #
+######################
+
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym $mod+Ctrl+Down exec xbacklight -dec 10
+bindsym $mod+Ctrl+Up exec xbacklight -inc 10
+
 ##################
 # Volume Control #
 ##################
