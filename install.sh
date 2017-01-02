@@ -13,9 +13,13 @@ sudo apt-get install \
   i3 \
   i3blocks \
   powerline \
+  rfkill \
   vim \
   wicd \
   xbacklight
+
+# change default settings for bluetooth power management
+gsettings set org.blueman.plugins.powermanager auto-power-on false
 
 # link config directories to dotfiles checkout
 ln -s $DOTFLIES/i3 $HOME/.config/i3

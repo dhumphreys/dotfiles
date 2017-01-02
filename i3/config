@@ -209,6 +209,7 @@ bar {
 exec_always "compton -CGb"
 exec "dropbox start"
 exec "wicd-client --tray"
+exec "/usr/sbin/rfkill block bluetooth && blueman-applet"
 
 # open program launcher
 bindsym $mod+r exec dmenu_run
