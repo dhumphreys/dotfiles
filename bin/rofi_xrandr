@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# configure names of laptop and external outputs
+LAPTOP="eDP1"
+EXTERNAL="HDMI1"
+
+# ask user which layout via rofi pop-up
+LAYOUTS="Laptop\nExternal\nMirror\nLeft\nRight\nTop"
+LAYOUT=$(echo -e "$LAYOUTS" | rofi -dmenu -i -p "Select Layout:")
+
+# parse external monitor resolution
+RESOLUTION=$(xrandr -q | grep "$EXTERNAL connected" -A 1 | tail -1 | awk '{ print $1 }')
+if [ -z $RESOLUTION ]; then notify-send "Output Layout" "No external output connected"; exit 1; fi
+WIDTH=$(echo $RESOLUTION | tr "x" "\n" | head -1)
+HEIGHT=$(echo $RESOLUTION | tr "x" "\n" | tail -1)
+
+# depending on layout choice, set output resolution and layout
+if [ "Left" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --mode $RESOLUTION --pos 0x0 --output $LAPTOP --mode 1920x1080 --pos ${WIDTH}x0
+  notify-send "Output Layout" "$EXTERNAL on Left"
+elif [ "Right" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --mode $RESOLUTION --pos 1920x0 --output $LAPTOP --mode 1920x1080 --pos 0x0
+  notify-send "Output Layout" "$EXTERNAL on Right"
+elif [ "Top" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --mode $RESOLUTION --pos 0x0 --output $LAPTOP --mode 1920x1080 --pos 0x${HEIGHT}
+  notify-send "Output Layout" "$EXTERNAL on Top"
+elif [ "Mirror" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --mode $RESOLUTION --pos 0x0 --output $LAPTOP --mode 1920x1080 --pos 0x0
+  notify-send "Output Layout" "Mirror"
+elif [ "External" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --mode $RESOLUTION --pos 0x0 --output $LAPTOP --off
+  notify-send "Output Layout" "$EXTERNAL Only"
+elif [ "Laptop" = "$LAYOUT" ]; then
+  xrandr --output $EXTERNAL --off --output $LAPTOP --mode 1920x1080 --pos 0x0
+  notify-send "Output Layout" "Laptop Only"
+fi

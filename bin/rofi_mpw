@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# get known env configuration
+source "$HOME/.zshrc"
+
+# create sites file if it does not exist
+touch $HOME/.mpw-sites
+
+# get site name from rofi
+MP_SITE=$(cat $HOME/.mpw-sites | sort | rofi -dmenu -p "Site:")
+if [ -z "$MP_SITE" ]; then exit 1; fi
+
+# get password from rofi
+MP_PASSWORD=$(echo -e "" | rofi -dmenu -p "Password:" -password)
+if [ -z "$MP_PASSWORD" ]; then exit 1; fi
+
+# generate password and copy to clipboard
+mpw -P "$MP_PASSWORD" "$MP_SITE" 2> /dev/null | tr -d '\n' | xclip -selection clipboard -loop 1
+notify-send "Master Password" "Password for $MP_SITE copied to clipboard."

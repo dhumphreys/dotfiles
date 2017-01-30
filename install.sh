@@ -23,6 +23,9 @@ sudo apt-get install \
 # change default settings for bluetooth power management
 gsettings set org.blueman.plugins.powermanager auto-power-on false
 
+# link bin folder to dotfiles checkout
+ln -s $DOTFILES/bin $HOME/bin
+
 # link config directories to dotfiles checkout
 ln -s $DOTFLIES/i3 $HOME/.config/i3
 ln -s $DOTFLIES/i3blocks $HOME/.config/i3blocks

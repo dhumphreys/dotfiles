@@ -109,6 +109,12 @@ assign [class="Atom"] $ws2
 assign [class="Spotify"] $ws4
 assign [class="Thunar"] $ws5
 
+###########
+# Outputs #
+###########
+
+bindsym $mod+Shift+m exec "$HOME/bin/rofi_xrandr"
+
 ####################
 # Power Management #
 ####################
@@ -223,6 +229,9 @@ bindsym $mod+Return exec "i3-sensible-terminal"
 
 # open program launcher
 bindsym $mod+space exec "rofi -show run"
+
+# open password generator
+bindsym $mod+Ctrl+p exec "$HOME/bin/rofi_mpw"
 
 # application shortcut mode
 bindsym $mod+Shift+space mode "Launch"
