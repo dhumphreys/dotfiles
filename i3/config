@@ -13,7 +13,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+Shift+o kill
 
 # change focus
 bindsym $mod+h focus left
@@ -38,25 +38,25 @@ bindsym $mod+g split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+m fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+space layout toggle split
+bindsym $mod+y layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+f floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+Ctrl+space focus mode_toggle
+bindsym $mod+Shift+f focus mode_toggle
 
 # focus the parent/child container
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -74,6 +74,8 @@ set $ws5 "5:Files"
 set $ws6 "6:System"
 
 # switch to workspace
+bindsym $mod+u workspace prev
+bindsym $mod+i workspace next
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -97,6 +99,10 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# move workspaces between outputs
+bindsym $mod+Shift+u move workspace to output right
+bindsym $mod+Shift+i move workspace to output left
+
 # bind apps to workspaces
 assign [class="chromium"] $ws1
 assign [class="Atom"] $ws2
@@ -107,14 +113,14 @@ assign [class="Thunar"] $ws5
 # Power Management #
 ####################
 
-bindsym $mod+Shift+q mode "Power"
+bindsym $mod+Ctrl+o mode "Power"
 mode "Power" {
   set $i3lock i3lock -i /home/donald/Dropbox/Photos/Wallpapers/planet-hud.jpg
   bindsym p exec systemctl poweroff
   bindsym r exec systemctl reboot
   bindsym l mode "default", exec $i3lock
   bindsym q exec --no-startup-id i3-msg exit, mode "default"
-  bindsym h exec systemctl hibernate
+  bindsym h exec systemctl hibernate, mode "default"
   bindsym s exec "$i3lock && systemctl suspend", mode "default"
   #bindsym s exec systemctl hybrid-sleep
 
@@ -128,8 +134,8 @@ mode "Power" {
 
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym $mod+Ctrl+Down exec xbacklight -dec 10
-bindsym $mod+Ctrl+Up exec xbacklight -inc 10
+bindsym $mod+Ctrl+minus exec xbacklight -dec 10
+bindsym $mod+Ctrl+plus exec xbacklight -inc 10
 
 ##################
 # Volume Control #
@@ -139,8 +145,8 @@ bindsym XF86AudioMute exec "amixer sset Master toggle"
 bindsym XF86AudioLowerVolume exec "amixer sset Master 5%- unmute"
 bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+ unmute"
 bindsym $mod+Ctrl+space exec "amixer sset Master toggle"
-bindsym $mod+Ctrl+Left exec "amixer sset Master 5%- unmute"
-bindsym $mod+Ctrl+Right exec "amixer sset Master 5%+ unmute"
+bindsym $mod+Ctrl+u exec "amixer sset Master 5%- unmute"
+bindsym $mod+Ctrl+i exec "amixer sset Master 5%+ unmute"
 bindsym $mod+Ctrl+1 exec "amixer sset Master 10% unmute"
 bindsym $mod+Ctrl+2 exec "amixer sset Master 20% unmute"
 bindsym $mod+Ctrl+3 exec "amixer sset Master 30% unmute"
@@ -156,9 +162,9 @@ bindsym $mod+Ctrl+0 exec "amixer sset Master 100% unmute"
 # Media Control #
 #################
 
-bindsym $mod+Ctrl+p exec "playerctl play-pause"
+bindsym $mod+Ctrl+m exec "playerctl play-pause"
 bindsym $mod+Ctrl+n exec "playerctl next"
-bindsym $mod+Ctrl+m exec "playerctl previous"
+bindsym $mod+Ctrl+b exec "playerctl previous"
 
 ##############
 # Appearance #
@@ -210,19 +216,23 @@ exec_always "compton -CGb"
 exec "dropbox start"
 exec "wicd-client --tray"
 exec "/usr/sbin/rfkill block bluetooth && blueman-applet"
+exec "spotify"
+
+# open terminal
+bindsym $mod+Return exec "i3-sensible-terminal"
 
 # open program launcher
-bindsym $mod+r exec dmenu_run
+bindsym $mod+space exec "rofi -show run"
 
 # application shortcut mode
-bindsym $mod+Return exec "i3-sensible-terminal"
-bindsym $mod+o mode "Launch"
+bindsym $mod+Shift+space mode "Launch"
 mode "Launch" {
   bindsym a exec atom
   bindsym t exec thunar
   bindsym c exec chromium
   bindsym s exec spotify
   bindsym v exec pavucontrol
+  bindsym space mode "default"
   bindsym Escape mode "default"
   bindsym Return mode "default"
 }

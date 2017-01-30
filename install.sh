@@ -12,8 +12,10 @@ sudo apt-get install \
   fonts-hack-ttf \
   i3 \
   i3blocks \
+  libnotify-bin \
   powerline \
   rfkill \
+  rofi \
   vim \
   wicd \
   xbacklight
