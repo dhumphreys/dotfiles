@@ -1,0 +1,33 @@
+# win+key - desktop navigation layer
+
+h/j/k/l - select container (left/down/up/right)
+m - maximize container
+u/i - select workspace (left/right)
+0-9 - select workspace by number
+space - launch dmenu
+return - open terminal
+
+# win+shift+key - desktop organization layer
+
+h/j/k/l - move container (left/down/up/right)
+o - close container
+n - split container (vertical split)
+space - program launch menu
+?/t/y - change layout (split toggle/tabbed/stacked)
+u/i - move workspace (left/right)
+
+# win+ctrl+key - desktop control layer
+
+h/j/k/l - change container size (+w/+h/-h/-w)
+space - toggle volume mute
+0-9 - change volume (set level)
+u/i - change volume (inc/dec)
+-/+ - change brightness (inc/dec)
+o - power menu
+m - monitor control window
+
+# alt+key - program navigation layer
+
+# alt+shift+key - program selection layer
+
+# alt+ctrl+key - program control layer

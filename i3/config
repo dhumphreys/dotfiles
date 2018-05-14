@@ -13,7 +13,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # kill focused window
-bindsym $mod+Shift+o kill
+bindsym $mod+q kill
 
 # change focus
 bindsym $mod+h focus left
@@ -68,10 +68,18 @@ bindsym $mod+Shift+r restart
 # workspace names
 set $ws1 "1:Web"
 set $ws2 "2:Code"
-set $ws3 "3:Mail"
+set $ws3 "3:Chat"
 set $ws4 "4:Music"
 set $ws5 "5:Files"
 set $ws6 "6:System"
+
+# assign workspaces to outputs
+workspace $ws1 output HDMI1
+workspace $ws2 output HDMI1
+workspace $ws3 output eDP1
+workspace $ws4 output eDP1
+workspace $ws5 output eDP1
+workspace $ws6 output eDP1
 
 # switch to workspace
 bindsym $mod+u workspace prev
@@ -106,20 +114,21 @@ bindsym $mod+Shift+i move workspace to output left
 # bind apps to workspaces
 assign [class="chromium"] $ws1
 assign [class="Atom"] $ws2
-assign [class="Spotify"] $ws4
+for_window [class="Pavucontrol"] move to workspace $ws4
+for_window [class="Spotify"] move to workspace $ws4
 assign [class="Thunar"] $ws5
 
 ###########
 # Outputs #
 ###########
 
-bindsym $mod+Shift+m exec "$HOME/bin/rofi_xrandr"
+bindsym $mod+Ctrl+o exec "$HOME/bin/rofi_xrandr"
 
 ####################
 # Power Management #
 ####################
 
-bindsym $mod+Ctrl+o mode "Power"
+bindsym $mod+Ctrl+q mode "Power"
 mode "Power" {
   set $i3lock i3lock -i /home/donald/Dropbox/Photos/Wallpapers/planet-hud.jpg
   bindsym p exec systemctl poweroff

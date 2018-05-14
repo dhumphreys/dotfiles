@@ -16,6 +16,7 @@ sudo apt-get install \
   powerline \
   rfkill \
   rofi \
+  tree \
   vim \
   wicd \
   xbacklight

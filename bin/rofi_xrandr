@@ -6,11 +6,11 @@ EXTERNAL="HDMI1"
 
 # ask user which layout via rofi pop-up
 LAYOUTS="Laptop\nExternal\nMirror\nLeft\nRight\nTop"
-LAYOUT=$(echo -e "$LAYOUTS" | rofi -dmenu -i -p "Select Layout:")
+LAYOUT=$(echo -e "$LAYOUTS" | rofi -dmenu -i -p "Output Layout:")
 
 # parse external monitor resolution
 RESOLUTION=$(xrandr -q | grep "$EXTERNAL connected" -A 1 | tail -1 | awk '{ print $1 }')
-if [ -z $RESOLUTION ]; then notify-send "Output Layout" "No external output connected"; exit 1; fi
+#if [ -z $RESOLUTION ]; then notify-send "Output Layout" "No external output connected"; exit 1; fi
 WIDTH=$(echo $RESOLUTION | tr "x" "\n" | head -1)
 HEIGHT=$(echo $RESOLUTION | tr "x" "\n" | tail -1)
 
